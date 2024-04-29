@@ -1,5 +1,5 @@
 <?php
-
+// INICIO DA SESSÃO // 
 session_start();
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -26,7 +26,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style>
 </head>
 <body> 
-    <form action="cadastromoto02.php" method="post">
+    <!-- TELA DE CADASTRO DAS MOTOS -->
+    <form action="cadastromoto.php" method="post">
             <div class="form-group">
                 <label>Nome completo</label>
                 <input type="text" name="nome" class="form-control">
@@ -50,9 +51,33 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="voltar">
             </div>
-        </form>
-    </div>
-    </div>
-    
+    </form>
 </body>
 </html>
+
+
+<?php
+// CÓDIGO PARA CRIAR O ARQUIVO TXT E GRAVAR AS INFORMAÇÕES RELACIONADAS AS MOTOS //
+
+if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["ra"]) && !empty($_POST["ra"]) && isset($_POST["placa"]) && !empty($_POST["placa"]))
+{
+
+    if(!file_exists("motos.txt")){
+        $cadastros = fopen("motos.txt", "a");
+    } else{
+        $cadastros = fopen("motos.txt", "a");
+    }
+
+    fwrite($cadastros, $_POST["nome"]." | ".$_POST["ra"]." | ".$_POST["placa"]."\n");
+    fwrite($cadastros, "==========================================="."\n");
+    fflush($cadastros);
+    fclose($cadastros);
+
+}
+else
+{
+    echo(" AVISO: Ainda faltam informações.");
+    echo(" ||  CADASTRO NÃO REALIZADO");
+}
+
+?>

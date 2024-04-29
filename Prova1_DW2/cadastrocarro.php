@@ -26,6 +26,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style>
 </head>
 <body> 
+    <!-- FORMS PARA INSERIR AS INFORMAÇÕES DO CARRO E DO ALUNO -->
     <form action="cadastrocarro02.php" method="post">
         <div class="form-group">
              <label>Nome completo</label>
@@ -52,8 +53,32 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
              <input type="submit" class="btn btn-primary" value="voltar">
          </div>
      </form>
-
-    </div>
-    
 </body>
 </html>
+
+
+<?php
+// CÓDIGO PARA CRIAR O ARQUIVO TXT E GRAVAR AS INFORMAÇÕES DOS CARROS // 
+
+if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["ra"]) && !empty($_POST["ra"]) && isset($_POST["placa"]) && !empty($_POST["placa"]))
+{
+
+    if(!file_exists("carros.txt")){
+        $cadastros = fopen("carros.txt", "a");
+    } else{
+        $cadastros = fopen("carros.txt", "a");
+    }
+    
+    fwrite($cadastros, $_POST["nome"]." | ".$_POST["ra"]." | ".$_POST["placa"]."\n");
+    fwrite($cadastros, "==========================================="."\n");
+    fflush($cadastros);
+    fclose($cadastros);
+} 
+else 
+{
+    echo(" AVISO: Ainda faltam informações.");
+    echo(" ||  CADASTRO NÃO REALIZADO");
+}
+   
+ 
+?>
