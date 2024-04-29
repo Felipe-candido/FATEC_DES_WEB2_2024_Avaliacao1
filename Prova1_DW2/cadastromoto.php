@@ -72,7 +72,8 @@ if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["ra"]) && !em
     fwrite($cadastros, "==========================================="."\n");
     fflush($cadastros);
     fclose($cadastros);
-
+    $nome = $_POST["nome"];
+    header("location: finalizado.php?aluno=$nome");
 }
 else
 {

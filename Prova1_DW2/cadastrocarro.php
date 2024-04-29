@@ -27,7 +27,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body> 
     <!-- FORMS PARA INSERIR AS INFORMAÇÕES DO CARRO E DO ALUNO -->
-    <form action="cadastrocarro02.php" method="post">
+    <form action="cadastrocarro.php" method="post">
         <div class="form-group">
              <label>Nome completo</label>
             <input type="text" name="nome" class="form-control">
@@ -73,6 +73,8 @@ if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["ra"]) && !em
     fwrite($cadastros, "==========================================="."\n");
     fflush($cadastros);
     fclose($cadastros);
+    $nome = $_POST["nome"];
+    header("location: finalizado.php?aluno=$nome");
 } 
 else 
 {
