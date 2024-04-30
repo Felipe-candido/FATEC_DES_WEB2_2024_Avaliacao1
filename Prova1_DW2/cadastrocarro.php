@@ -27,20 +27,20 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body> 
     <!-- FORMS PARA INSERIR AS INFORMAÇÕES DO CARRO E DO ALUNO -->
-    <form action="cadastrocarro.php" method="post">
+    <form id="cadastro_carro" action="cadastrocarro.php" method="post" onsubmit="return validarForm()">
         <div class="form-group">
              <label>Nome completo</label>
-            <input type="text" name="nome" class="form-control">
+            <input id="NOME" type="text" name="nome" class="form-control">
             <span class="help-block"></span>
         </div>    
         <div class="form-group">
             <label>RA</label>
-            <input type="text" name="ra" class="form-control">
+            <input id="RA" type="text" name="ra" class="form-control">
             <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Placa</label>
-            <input type="text" name="placa" class="form-control">
+            <input id="PLACA" type="text" name="placa" class="form-control">
             <span class="help-block"></span>
         </div>
         <div class="form-group">
@@ -53,6 +53,23 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
              <input type="submit" class="btn btn-primary" value="voltar">
          </div>
      </form>
+
+     <script>
+        // FUNÇÃO PARA VALIDAR O PREENCHIMENTO E ENVIO DO FORMULÁRIO //
+        function validarForm(){
+            var form = document.getElementById('cadastro_carro');
+            var nome = document.getElementById('NOME').value;
+            var ra = document.getElementById('RA').value;
+            var placa = document.getElementById('PLACA').value;
+            
+            // VERIFICA SE HÁ ALGUM CAMPO VAZIO // 
+            if(nome.trim() === '' || ra.trim() === '' || placa.trim() === ''){
+                alert('Por favor, preencha todos os campos.');
+                return false; // IMPEDE O ENVIO DO FORM // 
+            }
+            return true; // PERMITE O ENVIO DO FORM
+        }
+     </script>
 </body>
 </html>
 
