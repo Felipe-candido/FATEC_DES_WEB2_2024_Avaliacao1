@@ -27,7 +27,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body> 
     <!-- TELA DE CADASTRO DAS MOTOS -->
-    <form id="cadastro_moto" action="cadastromoto.php" method="post" onsubmit="return validarForm()">
+    <form id="cadastro_moto" action="cadastromoto.php" method="post" onsubmit="return validarForm(event)">
             <div class="form-group">
                 <label>Nome completo</label>
                 <input id="NOME" type="text" name="nome" class="form-control">
@@ -55,7 +55,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
     <script>
         // FUNÇÃO PARA VALIDAR O PREENCHIMENTO E ENVIO DO FORMULÁRIO //
-        function validarForm(){
+        function validarForm(event){
             var form = document.getElementById('cadastro_moto');
             var nome = document.getElementById('NOME').value;
             var ra = document.getElementById('RA').value;
@@ -66,6 +66,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 alert('Por favor, preencha todos os campos.');
                 return false; // IMPEDE O ENVIO DO FORM // 
             }
+            alert('Cadastro realizado!');
             return true; // PERMITE O ENVIO DO FORM
         }
     </script>
@@ -90,12 +91,7 @@ if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["ra"]) && !em
     fflush($cadastros);
     fclose($cadastros);
     $nome = $_POST["nome"];
-    header("location: finalizado.php?aluno=$nome");
-}
-else
-{
-    echo(" AVISO: Ainda faltam informações.");
-    echo(" ||  CADASTRO NÃO REALIZADO");
+    header("location: navegacao.php");
 }
 
 ?>

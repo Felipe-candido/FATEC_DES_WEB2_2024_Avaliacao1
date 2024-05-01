@@ -27,7 +27,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body> 
     <!-- FORMS PARA INSERIR AS INFORMAÇÕES DO CARRO E DO ALUNO -->
-    <form id="cadastro_carro" action="cadastrocarro.php" method="post" onsubmit="return validarForm()">
+    <form id="cadastro_carro" action="cadastrocarro.php" method="post" onsubmit="return validarForm(event)">
         <div class="form-group">
              <label>Nome completo</label>
             <input id="NOME" type="text" name="nome" class="form-control">
@@ -56,17 +56,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
      <script>
         // FUNÇÃO PARA VALIDAR O PREENCHIMENTO E ENVIO DO FORMULÁRIO //
-        function validarForm(){
+        function validarForm(event){
             var form = document.getElementById('cadastro_carro');
-            var nome = document.getElementById('NOME').value;
-            var ra = document.getElementById('RA').value;
-            var placa = document.getElementById('PLACA').value;
+            var nome = document.getElementById('NOME').value.trim();
+            var ra = document.getElementById('RA').value.trim();
+            var placa = document.getElementById('PLACA').value.trim();
             
             // VERIFICA SE HÁ ALGUM CAMPO VAZIO // 
             if(nome.trim() === '' || ra.trim() === '' || placa.trim() === ''){
                 alert('Por favor, preencha todos os campos.');
                 return false; // IMPEDE O ENVIO DO FORM // 
             }
+            alert('Cadastro realizado!');
             return true; // PERMITE O ENVIO DO FORM
         }
      </script>
@@ -74,9 +75,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </html>
 
 
-<?php
-// CÓDIGO PARA CRIAR O ARQUIVO TXT E GRAVAR AS INFORMAÇÕES DOS CARROS // 
 
+<?php
+
+// CÓDIGO PARA CRIAR O ARQUIVO TXT E GRAVAR AS INFORMAÇÕES DOS CARROS // 
 if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["ra"]) && !empty($_POST["ra"]) && isset($_POST["placa"]) && !empty($_POST["placa"]))
 {
 
@@ -91,13 +93,6 @@ if(isset($_POST["nome"]) && !empty($_POST["nome"]) && isset($_POST["ra"]) && !em
     fflush($cadastros);
     fclose($cadastros);
     $nome = $_POST["nome"];
-    header("location: finalizado.php?aluno=$nome");
+    header("location: navegacao.php");
 } 
-else 
-{
-    echo(" AVISO: Ainda faltam informações.");
-    echo(" ||  CADASTRO NÃO REALIZADO");
-}
-   
- 
 ?>
