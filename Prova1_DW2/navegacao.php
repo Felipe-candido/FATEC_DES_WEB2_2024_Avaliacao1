@@ -15,24 +15,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=B, initial-scale=1.0">
     <title>Página Inicial</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="estilo.css">
-    <style>
-        .botoes{
-            background-color: rgba(0,0,0,0.6);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 5px;
-            padding-left:50px;
-            padding-right: 50px;
-        }
-        
-    </style>
 </head>
 <body>
-    <h1>Bem vindo a central de estacionamento da Fatec Araras</h1>
+    <h1>Navegação</h1>
     <div class="botoes">
         <p>
             <form action="cadastrocarro.php">
